@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Chen Qing Ling</title>
+  <style>
+    body {
+      background: linear-gradient(180deg, #e3d5ec, #fdfbff);
+      background-size: 400% 400%;
+      animation: gradientFlow 20s ease infinite;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .particle {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: url('https://i.imgur.com/jK7ozlP.png') no-repeat center center;
+      background-size: contain;
+      animation: floatUp 12s linear infinite;
+      opacity: 0.7;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+      20% { opacity: 0.5; }
+      50% { opacity: 0.8; }
+      100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 1;
+    }
+    h1 {
+      color: #6b1e7d;
+    }
+    .question {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+    }
+    .options button, #restart {
+      display: block;
+      margin: 10px auto;
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 8px;
+      background-color: #6b1e7d;
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .options button:hover {
+      transform: scale(1.05);
+    }
+    .score {
+      margin-top: 20px;
+      font-size: 1.2em;
+    }
+    #celebration {
+      display: none;
+      margin-top: 30px;
+    }
+    #celebration img {
+      max-width: 300px;
+      animation: pulse 2s infinite;
+    }
+    #ranking {
+      margin-top: 20px;
+      font-size: 1.2em;
+      font-style: italic;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <audio id="bgm" autoplay loop>
+    <source src="https://dl.sndup.net/mfxk/TheUntamedTheme.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="sound-correct" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_392ddc1b30.mp3?filename=correct-answer-2-122108.mp3"></audio>
+  <audio id="sound-wrong" src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_55bcaeb6fb.mp3?filename=wrong-answer-126515.mp3"></audio>
+  <div class="container">
+    <h1>Quiz Chen Qing Ling</h1>
+    <div id="quiz">
+      <div class="question" id="question"></div>
+      <div class="options" id="options"></div>
+      <div class="score">Pontuação: <span id="score">0</span></div>
+    </div>
+    <div id="celebration">
+      <h2>🎁 Você desbloqueou um presente encantado!</h2>
+      <img src="https://i.imgur.com/YsH4vvV.gif" alt="Wei Wuxian e Lan Wangji com presente encantado">
+    </div>
+    <div id="ranking"></div>
+    <button id="restart" onclick="restartQuiz()" style="display:none;">🔁 Jogar Novamente</button>
+  </div>
+  <script>
+    // Criação de partículas flutuantes
+    function createParticles(num) {
+      for (let i = 0; i < num; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.animationDelay = (Math.random() * 15) + 's';
+        particle.style.width = (10 + Math.random() * 20) + 'px';
+        particle.style.height = particle.style.width;
+        document.body.appendChild(particle);
+      }
+    }
+    createParticles(20);
+  </script>
+</body>
+</html>
